@@ -1,0 +1,38 @@
+
+
+/* ---------- phase colours ---------- */
+.gantt_task_line.phase-1{background:#1abc9c!important}
+.gantt_task_line.phase-2{background:#3498db!important}
+.gantt_task_line.phase-3{background:#9b59b6!important}
+.gantt_task_line.phase-4{background:#f39c12!important}
+.gantt_task_line.phase-5{background:#e74c3c!important}
+.gantt_task_line.phase-6{background:#2ecc71!important}
+.gantt_task_line.phase-7{background:#e67e22!important}
+.gantt_task_line.phase-8{background:#16a085!important}
+.gantt_task_line.phase-9{background:#7f8c8d!important}
+.gantt_task_line.phase-x{background:#bdc3c7!important}
+.gantt_task_line.phase-line{height:12px!important}
+
+
+/* highlight rows with missing data */
+.missing-data {
+  color: red;
+}
+
+/* grey background for weekends */
+.gantt_task_cell.weekend, .gantt_scale_cell.weekend {
+  background-color: #eeeeee;
+}
+
+ 
+.gantt_task_content {
+    color: #4b4d09 !important; /* Black label text */
+    text-shadow: 0 0 1px #d1cdcd;
+    font-weight: bold;
+    overflow: visible !important;
+}
+  
+.gantt_cell, .gantt_task_cell {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+} 

@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsgantt-improved@2.9.2/dist/jsgantt.css">
+<script src="https://cdn.jsdelivr.net/npm/jsgantt-improved@2.9.2/dist/jsgantt.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsgantt-improved@2.9.2/dist/jsgantt-edit.js"></script>
+
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/jsgantt-improved@2.8.9/dist/jsgantt.css">
+  <script src="https://cdn.jsdelivr.net/npm/jsgantt-improved@2.8.9/dist/jsgantt.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsgantt-improved@2.8.9/dist/jsgantt-edit.js"></script>
+
+<div id="ganttDiv" style="height: 400px;"></div>
+<script>
+  // Intercept changes from grid editors (works regardless of vColumns support)
+  (function() {
+    const P = JSGantt.TaskItem.prototype;
+    function wrap(setter, getter, field) {
+      const orig = P[setter];
+      P[setter] = function(v) {
+        const oldVal = getter.call(this);
+        const ret = orig.call(this, v);
+        const newVal = getter.call(this);
+        if (newVal !== oldVal) {
+          console.log('Changed', { id: this.getID(), field, value: newVal, oldValue: oldVal });
+        }
+        return ret;
+      };
+    }
+    wrap('setName',     P.getName,     'title');
+    wrap('setStart',    P.getStart,    'start');
+    wrap('setEnd',      P.getEnd,      'finish');
+    wrap('setDuration', P.getDuration, 'duration');
+    wrap('setCompVal',  P.getCompVal,  'percent');
+  })();
+
+  const g = new JSGantt.GanttChart('ganttDiv', 'day');
+  g.setOptions({
+    vEditable: true,
+    vUseSingleCell: true,
+    // Use built-in columns; do not pass vColumns
+    vShowRes: 0,        // toggle as you like
+    vShowDur: 1,
+    vShowStartDate: 1,
+    vShowEndDate: 1
+  });
+  g.AddTaskItemObject({ pID: 1, pName: 'Task A', pStart: '2024-11-01', pEnd: '2024-11-03', pDur: 2, pComp: 0 });
+  g.AddTaskItemObject({ pID: 2, pName: 'Task B', pStart: '2024-11-04', pEnd: '2024-11-06', pDur: 2, pComp: 20 });
+  g.Draw();
+</script>

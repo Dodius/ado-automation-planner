@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Azure DevOps Gantt</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js"></script>
+  <link rel="stylesheet"
+        href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css">
+  <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
+</head>
+<body>
+  <h2>Azure DevOps Gantt</h2>
+
+  <label>
+    Project Team:
+    <select id="teamPicker">
+      <option value="POL" selected>POL</option>
+      <option value="SMRC">SMRC</option>
+      <option value="Olsom non-production">Olsom non-production</option>
+      <option value="Olsom internal">Olsom internal</option>
+    </select>
+  </label>
+
+  <label>
+    Location:
+    <select id="locationPicker">
+      <option value="">(Select team first)</option>
+    </select>
+  </label>
+
+  <label>
+    Project:
+    <select id="projectPicker">
+      <option value="">(Select location first)</option>
+    </select>
+  </label>
+
+  <label>
+    Zoom
+    <select id="zoomPicker">
+      <option value="Day">Day</option>
+      <option value="Week" selected>Week</option>
+      <option value="Month">Month</option>
+    </select>
+  </label>
+  <label style="margin-left:1rem">
+    <input type="checkbox" id="editableCheckbox" onchange="toggleEditable()">
+    Enable Editing
+  </label>
+
+  <label>
+    <input type="checkbox" id="phaseToggle" />
+    Show only phases
+  </label>
+
+  <!-- Simple task editor form shown when a bar is clicked -->
+  <div id="taskEditor" style="display:none">
+    <h3>Edit Task</h3>
+    <label>ID <input type="number" id="taskId" disabled /></label>
+    <label>Title <input type="text" id="taskTitle" /></label>
+    <label>Due Date <input type="date" id="taskDue" /></label>
+    <label>Original Estimate <input type="number" id="taskEst" /></label>
+    <label>Billable <input type="checkbox" id="taskBillable" /></label>
+    <label>Completed <input type="number" id="taskDone" readonly /></label>
+    <button id="taskSave">Save</button>
+    <button id="taskClose">Close</button>
+  </div>
+
+  <div id="summary" style="margin:0.5rem 0;font-weight:bold"></div>
+
+  <div id="GanttChartDIV" style="position:relative"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
